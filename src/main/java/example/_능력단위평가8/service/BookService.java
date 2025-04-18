@@ -6,6 +6,7 @@ import example._능력단위평가8.model.repository.BookRepository;
 import example._능력단위평가8.model.repository.ReviewRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,6 +24,9 @@ public class BookService {
     public boolean bookWrite( BookDto bookDto ){
         System.out.println("BookService.bookWrite");
         System.out.println("bookDto = " + bookDto);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPwd = passwordEncoder.encode( bookDto.getBpassword() );
+        bookDto.setBpassword( hashedPwd );
         BookEntity bookEntity = bookDto.toEntity();
         BookEntity save = bookRepository.save( bookEntity );
         if( save.getBno() > 0 ){ return true; }
@@ -59,7 +63,6 @@ public class BookService {
         return null;
     } // f end
 
-
     // 책 수정
     public boolean bookUpdate( BookDto bookDto ){
         System.out.println("BookService.bookUpdate");
@@ -68,7 +71,10 @@ public class BookService {
                 bookRepository.findById( bookDto.getBno() );
         if( optional.isPresent() ){
             BookEntity bookEntity = optional.get();
-            if( bookEntity.getBpassword() == bookDto.getBpassword() ) {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            boolean inMath
+                = passwordEncoder.matches( bookDto.getBpassword() , bookEntity.getBpassword() );
+            if( inMath == true ) {
                 bookEntity.setBtitle(bookDto.getBtitle());
                 bookEntity.setBname(bookDto.getBname());
                 bookEntity.setBcontent(bookDto.getBcontent());
@@ -79,13 +85,17 @@ public class BookService {
     } // f end
 
     // 책 삭제
-    public boolean bookDelete( int bno , int bpassword ){
+    public boolean bookDelete( int bno , String bpassword ){
         System.out.println("BookService.bookDelete");
         System.out.println("bno = " + bno + ", bpassword = " + bpassword);
         Optional< BookEntity > optional
                 = bookRepository.findById( bno );
         if( optional.isPresent() ){
-            if( optional.get().getBpassword() == bpassword ){
+            BookEntity bookEntity = optional.get();
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            boolean inMath
+                    = passwordEncoder.matches( bpassword , bookEntity.getBpassword() );
+            if( inMath == true ){
                 bookRepository.deleteById( bno );
                 return true;
             } // if end

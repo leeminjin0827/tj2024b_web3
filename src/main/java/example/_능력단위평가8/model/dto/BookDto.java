@@ -23,7 +23,7 @@ public class BookDto {
     // 책 소개
     private String bcontent;
     // 수정,삭제 를 위한 비밀번호
-    private int bpassword;
+    private String bpassword;
     // 등록날짜
     private LocalDateTime createAt;
     // 수정날짜

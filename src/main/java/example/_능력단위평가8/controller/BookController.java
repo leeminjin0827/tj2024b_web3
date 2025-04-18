@@ -61,7 +61,7 @@ public class BookController {
     // 책 삭제
     @DeleteMapping("")
     // [DELETE] : http://localhost:8080/test8/book?bno=#&bpassword=#
-    public boolean bookDelete(@RequestParam("bno") int bno , @RequestParam("bpassword") int bpassword ){
+    public boolean bookDelete(@RequestParam("bno") int bno , @RequestParam("bpassword") String bpassword ){
         System.out.println("BookController.bookDelete");
         System.out.println("bno = " + bno + ", bpassword = " + bpassword);
         return bookService.bookDelete( bno , bpassword );

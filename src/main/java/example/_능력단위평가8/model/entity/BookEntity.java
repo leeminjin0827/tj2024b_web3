@@ -29,7 +29,7 @@ public class BookEntity extends BaseTime {
     @Column( nullable = false )
     private String bcontent; // 책 소개
     @Column( nullable = false )
-    private int bpassword; // 수정,삭제 를 위한 비밀번호
+    private String bpassword; // 수정,삭제 를 위한 비밀번호
 
     public BookDto toDto(){
         return BookDto.builder()

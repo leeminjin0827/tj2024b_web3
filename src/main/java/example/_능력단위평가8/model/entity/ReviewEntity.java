@@ -27,7 +27,7 @@ public class ReviewEntity extends BaseTime{
     @Column( nullable = false )
     private String rcontent; // 리뷰 내용
     @Column( nullable = false )
-    private int rpassword; // 삭제할 때 필요한 비밀번호
+    private String rpassword; // 삭제할 때 필요한 비밀번호
     @ManyToOne
     private BookEntity bookEntity;
 

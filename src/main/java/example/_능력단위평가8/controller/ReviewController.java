@@ -42,7 +42,7 @@ public class ReviewController {
     // 리뷰 삭제
     @DeleteMapping("")
     // [DELETE] : http://localhost:8080/test8/review?rno=#&rpassword=#
-    public boolean reviewDelete( @RequestParam("rno") int rno, @RequestParam("rpassword") int rpassword ){
+    public boolean reviewDelete( @RequestParam("rno") int rno, @RequestParam("rpassword") String rpassword ){
         System.out.println("ReviewController.reviewDelete");
         System.out.println("rno = " + rno + ", rpassword = " + rpassword);
         return reviewService.reviewDelete( rno , rpassword );

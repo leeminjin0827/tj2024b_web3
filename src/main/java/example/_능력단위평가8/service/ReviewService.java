@@ -59,7 +59,7 @@ public class ReviewService {
     } // f end
 
     // 리뷰 삭제
-    public boolean reviewDelete( int rno , int rpassword ){
+    public boolean reviewDelete( int rno , String rpassword ){
         System.out.println("ReviewService.reviewDelete");
         System.out.println("rno = " + rno + ", rpassword = " + rpassword);
         Optional<ReviewEntity> optional = reviewRepository.findById( rno );

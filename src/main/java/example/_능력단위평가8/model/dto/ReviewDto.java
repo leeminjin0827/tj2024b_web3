@@ -19,7 +19,7 @@ public class ReviewDto {
     // 리뷰내용
     private String rcontent;
     // 삭제 할 때 사용하는 비밀번호
-    private int rpassword;
+    private String rpassword;
     // 등록날짜
     private LocalDateTime createAt;
     // 책 식별번호

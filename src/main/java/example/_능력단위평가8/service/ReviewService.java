@@ -7,6 +7,7 @@ import example._능력단위평가8.model.repository.BookRepository;
 import example._능력단위평가8.model.repository.ReviewRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,6 +25,9 @@ public class ReviewService {
     public boolean reviewWrite(ReviewDto reviewDto){
         System.out.println("ReviewService.reviewWrite");
         System.out.println("reviewDto = " + reviewDto);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPwd = passwordEncoder.encode( reviewDto.getRpassword() );
+        reviewDto.setRpassword( hashedPwd );
         ReviewEntity reviewEntity = reviewDto.toEntity();
         ReviewEntity save = reviewRepository.save( reviewEntity );
         System.out.println("[1]save = " + save);
@@ -64,13 +68,16 @@ public class ReviewService {
         System.out.println("rno = " + rno + ", rpassword = " + rpassword);
         Optional<ReviewEntity> optional = reviewRepository.findById( rno );
         if( optional.isPresent() ){
-            if( optional.get().getRpassword() == rpassword ){
+            ReviewEntity reviewEntity = optional.get();
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            boolean inMath
+                    = passwordEncoder.matches( rpassword , reviewEntity.getRpassword() );
+            if( inMath == true ){
                 reviewRepository.deleteById( rno );
                 return true;
             } // if end
         } // if end
         return false;
     } // f end
-
 
 } // c end

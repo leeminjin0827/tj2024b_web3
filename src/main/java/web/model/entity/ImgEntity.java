@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ImgEntity {
+public class ImgEntity extends BaseTime{
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY )
     private long ino; // 이미지 식별번호

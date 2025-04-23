@@ -24,7 +24,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CategoryEntity {
+public class CategoryEntity extends BaseTime{
 
     @Id // primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment

@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ReplyEntity {
+public class ReplyEntity extends BaseTime{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )

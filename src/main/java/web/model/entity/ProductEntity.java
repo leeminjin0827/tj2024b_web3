@@ -27,7 +27,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductEntity {
+public class ProductEntity extends BaseTime{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -21,7 +21,7 @@ public class FileUtil {
     String uploadPath = baseDir+"/build/resources/main/static/upload/";
     
     // [1] 업로드 : 스프링에서는 MultipartFile 인터페이스 지원하므로써 파일 업로드 지원
-    public String fildUpload(MultipartFile multipartFile ){ // (1) 매개변수로 'MultipartFile' 인터페이스 타입을 받는다.
+    public String fileUpload(MultipartFile multipartFile ){ // (1) 매개변수로 'MultipartFile' 인터페이스 타입을 받는다.
         // (2) 업로드 할 경로 만들기. // '업로드할 기본경로' 와(+) '파일명'
         // (*) 동일한 파일명으로 업로드할경우 식별이 불가능하다. 해결방안 : UUID , 식별자 생성
         String uuid = UUID.randomUUID().toString(); // UUID 규약에 따른 난수 문자열 생성( 고유성 보장 )

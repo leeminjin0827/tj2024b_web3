@@ -1,4 +1,9 @@
 package web.model.repository;
 
-public interface ImgRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import web.model.entity.ImgEntity;
+
+@Repository
+public interface ImgRepository extends JpaRepository<ImgEntity,Long> {
 }
